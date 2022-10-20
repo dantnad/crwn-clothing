@@ -1,10 +1,10 @@
 import categories from "./categories";
-import Categories from "./components/categories/categories.component";
+import Directory from "./components/directory/directory.component";
 
 const App = () => {
   return (
     <div className="app">
-      <Categories categories={categories} />
+      <Directory categories={categories} />
     </div>
   );
 };
