@@ -64,8 +64,8 @@ const SignUpForm = () => {
   // Return functional component
   return (
     <div className="sign-up-container">
-      <h2>Don't have an account?</h2>
-      <span>Sign up with your email and password</span>
+      <span>Don't have an account?</span>
+      <h2>Sign up with your email and password</h2>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"

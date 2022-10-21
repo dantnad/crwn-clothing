@@ -28,18 +28,27 @@ const SignIn = ({ ...otherProps }) => {
     //Prevent default form submit behaviour
     event.preventDefault();
     try {
-      //Create a user using Firebase Authentication with Email and Password
+      //Sign in a user using Firebase Authentication with Email and Password
       const { user } = await signInUserWithEmailAndPassword(email, password);
       // If for some reason we don't get back an user, we throw and error and stop user database creation
       if (!user) throw new Error("No user was given back", user);
-      // Once Firebase Auth User has been created, create the user's database
+      // Once Firebase Auth User has authenticated the user, alert a successful login
       alert("Login Successful");
       //Reset the form fields
       setFormFields(defaultFormFields);
     } catch (error) {
-      error.code === "auth/user-not-found" && alert("Username doesn't exist");
-      error.code === "auth/wrong-password" &&
-        alert("Wrong user/password combination");
+      switch (error.code) {
+        case "auth/user-not-found":
+          alert("User does not exist");
+          break;
+
+        case "auth/wrong-password":
+          alert("Wrong user/password combination");
+          break;
+        default:
+          console.error("Unexpected error", error.code, error.message);
+          break;
+      }
       console.error("There was an error", error.message);
     }
   };
@@ -70,10 +79,12 @@ const SignIn = ({ ...otherProps }) => {
           type="password"
           value={password}
         />
-        <Button type="submit">Sign In</Button>
-        <Button buttonType="google" onClick={logGoogleUser}>
-          Sign In With Google
-        </Button>
+        <div className="buttons-container">
+          <Button type="submit">Sign In</Button>
+          <Button type="button" buttonType="google" onClick={logGoogleUser}>
+            Sign In With Google
+          </Button>
+        </div>
       </form>
     </div>
   );
