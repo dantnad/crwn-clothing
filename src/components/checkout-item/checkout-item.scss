@@ -22,13 +22,15 @@
 
   .arrow {
     cursor: pointer;
+    font-size: large;
     background-color: transparent;
     border: none;
   }
 
   .remove {
     button {
-        cursor: pointer;
+      font-size: large;
+      cursor: pointer;
     }
   }
 }

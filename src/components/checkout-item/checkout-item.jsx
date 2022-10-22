@@ -21,7 +21,7 @@ const CheckoutItem = ({ product }) => {
             decreaseItemFromCart(product);
           }}
         >
-          {"<"}
+          &#8810;
         </button>
         <span className="value">{` ${quantity} `}</span>
         <button
@@ -30,7 +30,7 @@ const CheckoutItem = ({ product }) => {
             addItemToCart(product);
           }}
         >
-          {">"}
+          &#8811;
         </button>
       </td>
       <td>{price}</td>
@@ -41,7 +41,7 @@ const CheckoutItem = ({ product }) => {
             removeItemFromCart(product);
           }}
         >
-          X
+          &#10006;
         </Button>
       </td>
     </tr>
