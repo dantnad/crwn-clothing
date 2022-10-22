@@ -55,15 +55,18 @@ export const CartContext = createContext({
   cartVisibility: false,
   cartItems: [],
   itemCount: null,
+  cartTotal: null,
   setCartVisibility: () => {},
   addItemToCart: () => {},
   setItemCount: () => {},
+  setCartTotal: () => {},
 });
 
 const CartProvider = ({ children }) => {
   const [cartVisibility, setCartVisibility] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [itemCount, setItemCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   const addItemToCart = (product) => {
     setCartItems(addCartItem(cartItems, product));
@@ -83,10 +86,16 @@ const CartProvider = ({ children }) => {
       0
     );
     setItemCount(newCartCount);
+    const newTotal = cartItems.reduce(
+      (sum, cartItem) => sum + cartItem.price * cartItem.quantity,
+      0
+    );
+    setCartTotal(newTotal);
   }, [cartItems]);
 
   const value = {
     cartItems,
+    cartTotal,
     addItemToCart,
     cartVisibility,
     setCartVisibility,
