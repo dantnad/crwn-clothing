@@ -1,62 +1,34 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/cart.context";
-import Button from "../../components/button/button.component";
+import { Link } from "react-router-dom";
+import CheckoutItem from "../../components/checkout-item/checkout-item";
 import "./cart.styles.scss";
 
 const Cart = () => {
-  const { cartItems, addItemToCart, removeItemFromCart, decreaseItemFromCart } =
-    useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   return (
-    <div className="cart-container">
+    <div className="checkout-container">
       <table>
-        <tr>
-          <th>Product</th>
-          <th>Description</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Remove</th>
+        <tr className="checkout-header">
+          <th className="header-block">Product</th>
+          <th className="header-block">Description</th>
+          <th className="header-block">Quantity</th>
+          <th className="header-block">Price</th>
+          <th className="header-block">Remove</th>
         </tr>
+
         {cartItems.map((item) => {
-          const { id, price, imageUrl, name, quantity } = item;
-          return (
-            <tr key={id} className="cart-item">
-              <td>
-                <img src={imageUrl} alt={name} />
-              </td>
-              <td>{name}</td>
-              <td className="quantity-selector">
-                <button
-                  onClick={() => {
-                    decreaseItemFromCart(item);
-                  }}
-                >
-                  {"<"}
-                </button>
-                <span>{` ${quantity} `}</span>
-                <button
-                  onClick={() => {
-                    addItemToCart(item);
-                  }}
-                >
-                  {">"}
-                </button>
-              </td>
-              <td>{price}</td>
-              <td>
-                <Button
-                  onClick={() => {
-                    removeItemFromCart(item);
-                  }}
-                >
-                  Remove
-                </Button>
-              </td>
-            </tr>
-          );
+          return <CheckoutItem key={item.id} product={item} />;
         })}
       </table>
-      <div className="cart-total">
+      {cartItems.length === 0 ? (
+        <div className="cart-empty">
+          <h2>Feels a bit empty here</h2>
+          <Link to="/shop">Go shopping</Link>
+        </div>
+      ) : null}
+      <div className="total">
         <span>
           $
           {cartItems.reduce(
