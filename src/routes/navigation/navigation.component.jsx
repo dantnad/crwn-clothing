@@ -1,15 +1,22 @@
-import "./navigation.styles.scss";
+// React imports
 import { Outlet, Link } from "react-router-dom";
-import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { useContext } from "react";
+// Component imports
+import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+// Context Imports
 import { UserContext } from "../../context/user.context";
 import { CartContext } from "../../context/cart.context";
+//Utils import
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+// Stylesheet import
+import "./navigation.styles.scss";
 
 const Navigation = () => {
+  // Get information about the current user
   const { currentUser } = useContext(UserContext);
+  // Get information about the cart
   const { cartVisibility, setCartVisibility } = useContext(CartContext);
 
   return (
@@ -22,6 +29,7 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
+          {/* Check if a user is currently logged in using context and provide Sign in or Sign out options accordingly */}
           {currentUser ? (
             <span
               onClick={async () => {
@@ -44,6 +52,7 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          {/* Cart Icon with an onclick listener to toggle Cart visibility */}
           <CartIcon
             onClick={() => {
               // Toggle functionality for the cart icon and dropdown
