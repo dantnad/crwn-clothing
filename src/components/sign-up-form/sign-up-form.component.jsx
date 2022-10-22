@@ -1,11 +1,15 @@
+// React Imports
 import { useState } from "react";
+// Component Imports
+import Button from "../button/button.component";
+import FormInput from "../form-input/form-input.component";
+// Utils Imports
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import FormInput from "../form-input/form-input.component";
+//Stylesheet Imports
 import "./sign-up-form.styles.scss";
-import Button from "../button/button.component";
 
 //Setting empty form fields as initial state
 const defaultFormFields = {
@@ -61,6 +65,7 @@ const SignUpForm = () => {
       console.error("There was an error", error.message);
     }
   };
+
   // Return functional component
   return (
     <div className="sign-up-container">
