@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 const addCartItem = (cartItems, productToAdd) => {
   const { id, name, imageUrl, price } = productToAdd;
   const exists = cartItems.some((item) => item.id === productToAdd.id);
-  const index = cartItems.findIndex((item) => item.id === productToAdd.id);
   if (!exists) {
     return [
       ...cartItems,
