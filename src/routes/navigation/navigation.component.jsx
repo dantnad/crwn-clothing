@@ -10,7 +10,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { visibility, setVisibility } = useContext(CartContext);
+  const { cartVisibility, setCartVisibility } = useContext(CartContext);
 
   return (
     <>
@@ -46,11 +46,13 @@ const Navigation = () => {
           )}
           <CartIcon
             onClick={() => {
-              setVisibility(!visibility);
+              // Toggle functionality for the cart icon and dropdown
+              setCartVisibility(!cartVisibility);
             }}
           />
         </div>
-        {visibility && <CartDropdown />}
+        {/* If the cartVisibility is true, show the dropdown */}
+        {cartVisibility && <CartDropdown />}
       </div>
       <Outlet />
     </>
