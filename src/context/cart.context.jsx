@@ -1,27 +1,21 @@
 import { createContext, useState } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
-  const { id, name, imageUrl, price } = productToAdd;
   const exists = cartItems.some((item) => item.id === productToAdd.id);
-  if (!exists) {
+  if (exists) {
+    return cartItems.map((cartItem) =>
+      cartItem.id === productToAdd.id
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem
+    );
+  } else {
     return [
       ...cartItems,
       {
-        id,
-        name,
-        imageUrl,
-        price,
+        ...productToAdd,
         quantity: 1,
       },
     ];
-  } else {
-    return cartItems.map((item) => {
-      if (item.id === productToAdd.id) {
-        return { ...item, quantity: item.quantity + 1 };
-      } else {
-        return item;
-      }
-    });
   }
 };
 
