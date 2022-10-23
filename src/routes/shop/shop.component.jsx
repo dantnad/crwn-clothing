@@ -5,8 +5,8 @@ import "./shop.styles.scss";
 
 const Shop = () => {
   const { categoriesMap } = useContext(CategoriesContext);
-
-  console.log(categoriesMap);
+  const categoryEntries = Object.entries(categoriesMap);
+  console.log(categoryEntries);
 
   return (
     <Fragment>
@@ -14,6 +14,10 @@ const Shop = () => {
         <Fragment key={title}>
           <h2>{title}</h2>
           <div className="products-container">
+            {/* {categoryEntries.map((category) => {
+              const [title, products] = category;
+              return <CategoryPreview title={title} products={products} />;
+            })} */}
             {categoriesMap[title].map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
