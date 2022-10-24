@@ -9,7 +9,7 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 //Stylesheet Imports
-import "./sign-up-form.styles.scss";
+import { SignUp } from "./sign-up-form.styles.jsx";
 
 //Setting empty form fields as initial state
 const defaultFormFields = {
@@ -68,7 +68,7 @@ const SignUpForm = () => {
 
   // Return functional component
   return (
-    <div className="sign-up-container">
+    <SignUp>
       <span>Don't have an account?</span>
       <h2>Sign up with your email and password</h2>
       <form onSubmit={handleSubmit}>
@@ -106,7 +106,7 @@ const SignUpForm = () => {
         />
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUp>
   );
 };
 

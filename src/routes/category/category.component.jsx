@@ -2,7 +2,12 @@ import { useContext, useState, useEffect, Fragment } from "react";
 import { CategoriesContext } from "../../context/categories.context";
 import { useParams, Link } from "react-router-dom";
 import ProductCard from "../../components/product-card/product-card.component";
-import "./category.styles.scss";
+import {
+  CategoryContainer,
+  CategoryHeader,
+  CategoryTitle,
+  TitleDecoration,
+} from "./category.styles.jsx";
 
 const Category = () => {
   const { category } = useParams();
@@ -15,20 +20,18 @@ const Category = () => {
 
   return (
     <Fragment>
-      <div className="category-header">
-        <Link className="goback" to="/shop">
-          &#10094; GO BACK
-        </Link>
-        <h2 className="category-title">
-          – <span>{category.toUpperCase()}</span> –
-        </h2>
-      </div>
-      <div className="category-container">
+      <CategoryHeader>
+        <Link to="/shop">&#10094; GO BACK</Link>
+        <CategoryTitle>
+          – <TitleDecoration>{category.toUpperCase()}</TitleDecoration> –
+        </CategoryTitle>
+      </CategoryHeader>
+      <CategoryContainer>
         {products &&
           products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
+      </CategoryContainer>
     </Fragment>
   );
 };

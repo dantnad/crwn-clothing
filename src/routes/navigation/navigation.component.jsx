@@ -1,6 +1,6 @@
 // React imports
-import { Outlet, Link } from "react-router-dom";
-import { useContext } from "react";
+import { Outlet } from "react-router-dom";
+import { useContext, Fragment } from "react";
 // Component imports
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -11,7 +11,12 @@ import { CartContext } from "../../context/cart.context";
 //Utils import
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 // Stylesheet import
-import "./navigation.styles.scss";
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLinks,
+  NavLink,
+} from "./navigation.styles.jsx";
 
 const Navigation = () => {
   // Get information about the current user
@@ -20,18 +25,17 @@ const Navigation = () => {
   const { cartVisibility, setCartVisibility } = useContext(CartContext);
 
   return (
-    <>
-      <div className="navigation">
-        <Link className="nav-logo" to="/">
+    <Fragment>
+      <NavigationContainer>
+        <LogoContainer to="/">
           <CrwnLogo />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop">SHOP</NavLink>
           {/* Check if a user is currently logged in using context and provide Sign in or Sign out options accordingly */}
           {currentUser ? (
-            <span
+            <NavLink
+              as="span"
               onClick={async () => {
                 try {
                   await signOutUser();
@@ -43,14 +47,11 @@ const Navigation = () => {
                   );
                 }
               }}
-              className="nav-link"
             >
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
-              SIGN IN
-            </Link>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
           {/* Cart Icon with an onclick listener to toggle Cart visibility */}
           <CartIcon
@@ -59,12 +60,12 @@ const Navigation = () => {
               setCartVisibility(!cartVisibility);
             }}
           />
-        </div>
+        </NavLinks>
         {/* If the cartVisibility is true, show the dropdown */}
         {cartVisibility && <CartDropdown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
-    </>
+    </Fragment>
   );
 };
 
