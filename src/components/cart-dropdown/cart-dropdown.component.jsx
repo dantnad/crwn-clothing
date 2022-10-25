@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/cart.context";
 import CartItem from "../cart-item/cart-item.component";
+import Button from "../button/button.component";
 import {
   CartDropdownContainer,
   CartDropdownEmptyMessage,
   CartDropdownItems,
-  CartDropdownButton,
 } from "./cart-dropdown.styles.jsx";
 
 const CartDropdown = () => {
@@ -25,7 +25,7 @@ const CartDropdown = () => {
         )}
       </CartDropdownItems>
       <Link to="/checkout">
-        <CartDropdownButton>GO TO CHECKOUT</CartDropdownButton>
+        <Button>Go to checkout</Button>
       </Link>
     </CartDropdownContainer>
   );

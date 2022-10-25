@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/cart.context";
 import {
   CartIconContainer,
-  ShoppingIconStyled,
+  ShoppingIcon,
   ShoppingItemIconCount,
 } from "./cart-icon.styles.jsx";
 
@@ -11,7 +11,7 @@ const CartIcon = ({ ...otherProps }) => {
 
   return (
     <CartIconContainer {...otherProps}>
-      <ShoppingIconStyled className="shopping-icon" />
+      <ShoppingIcon className="shopping-icon" />
       <ShoppingItemIconCount className="item-count">
         {itemCount}
       </ShoppingItemIconCount>

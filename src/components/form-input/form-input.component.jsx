@@ -7,7 +7,8 @@ const FormInputGroup = ({ label, ...otherProps }) => {
       {label && (
         <FormLabel
           htmlFor={FormInput}
-          className={`${otherProps.value.length ? "shrink" : ""}`}
+          className={otherProps.value.length}
+          shrink={otherProps.value.length ? true : false}
         >
           {label}
         </FormLabel>

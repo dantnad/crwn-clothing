@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const colors = {
+export const { subColor, mainColor } = {
   subColor: "grey",
   mainColor: "black",
 };
@@ -8,11 +8,11 @@ export const colors = {
 export const shrinkLabel = `
   top: -14px;
   font-size: 12px;
-  color: ${colors.mainColor};
+  color: ${mainColor};
 `;
 
 export const FormLabel = styled.label`
-  color: ${colors.subColor};
+  color: ${subColor};
   font-size: 16px;
   font-weight: normal;
   position: absolute;
@@ -21,9 +21,7 @@ export const FormLabel = styled.label`
   top: 10px;
   transition: 300ms ease all;
 
-  &.shrink {
-    ${shrinkLabel};
-  }
+  ${({ shrink }) => shrink && shrinkLabel}
 `;
 
 export const FormGroup = styled.div`
@@ -34,21 +32,21 @@ export const FormGroup = styled.div`
 export const FormInput = styled.input`
   background: none;
   background-color: white;
-  color: ${colors.subColor};
+  color: ${subColor};
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;
   width: 100%;
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid ${colors.subColor};
+  border-bottom: 1px solid ${subColor};
   margin: 25px 0;
 
   &:focus {
     outline: none;
   }
 
-  &:focus ~ .${FormLabel} {
+  &:focus ~ ${FormLabel} {
     ${shrinkLabel};
   }
 `;
