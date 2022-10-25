@@ -5,10 +5,10 @@ import {
 } from "./directory-item.styles.jsx";
 import { useNavigate } from "react-router-dom";
 
-const DirectoryItem = ({ category: { title, imageUrl }, route }) => {
+const DirectoryItem = ({ category: { title, imageUrl, url } }) => {
   const navigate = useNavigate();
   const navigateHandler = () => {
-    navigate(`/shop${route}`);
+    navigate(`/${url}`);
   };
 
   return (
