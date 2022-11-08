@@ -12,12 +12,12 @@ import {
 
 const CheckoutItem = ({ product }) => {
   const { imageUrl, name, quantity, price } = product;
-  const { addItemToCart, removeItemFromCart, decreaseItemFromCart } =
-    useContext(CartContext);
+  const { updateCartItems } = useContext(CartContext);
 
-  const addItemHandler = () => addItemToCart(product);
-  const decreaseItemHandler = () => decreaseItemFromCart(product);
-  const removeItemHandler = () => removeItemFromCart(product);
+  const addItemHandler = () => updateCartItems(product, "ADD_TO_CART");
+  const decreaseItemHandler = () =>
+    updateCartItems(product, "REDUCE_ITEM_COUNT");
+  const removeItemHandler = () => updateCartItems(product, "REMOVE_FROM_CART");
 
   return (
     <CheckoutItemContainer>
