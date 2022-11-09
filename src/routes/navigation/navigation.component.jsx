@@ -7,7 +7,7 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 // Context Imports
-import { UserContext } from "../../context/user.context";
+import { selectCurrentUser } from "../../store/user/user.selector";
 import { CartContext } from "../../context/cart.context";
 //Utils import
 import { signOutUser } from "../../utils/firebase/firebase.utils";
@@ -20,7 +20,7 @@ import {
 } from "./navigation.styles.jsx";
 
 const Navigation = () => {
-  const currentUser = useSelector(({ user }) => user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   // Get information about the cart
   const { cartVisibility, setCartVisibility } = useContext(CartContext);
 

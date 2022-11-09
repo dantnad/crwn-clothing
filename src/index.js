@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from "./context/user.context";
 import { CategoriesProvider } from "./context/categories.context";
 import CartProvider from "./context/cart.context";
 
