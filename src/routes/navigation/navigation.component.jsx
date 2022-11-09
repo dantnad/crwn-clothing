@@ -1,6 +1,7 @@
 // React imports
 import { Outlet } from "react-router-dom";
 import { useContext, Fragment } from "react";
+import { useSelector } from "react-redux";
 // Component imports
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -19,8 +20,7 @@ import {
 } from "./navigation.styles.jsx";
 
 const Navigation = () => {
-  // Get information about the current user
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(({ user }) => user.currentUser);
   // Get information about the cart
   const { cartVisibility, setCartVisibility } = useContext(CartContext);
 
