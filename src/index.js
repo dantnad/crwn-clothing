@@ -1,10 +1,14 @@
+//Libraries import
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+//Redux store import
 import { store } from "./store/store";
+//ReactRouter import
 import { BrowserRouter } from "react-router-dom";
+//Context providers
 import CartProvider from "./context/cart.context";
-
+//App import
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
