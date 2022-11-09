@@ -7,14 +7,6 @@ const INITIAL_STATE = {
   cartVisibility: false,
 };
 
-// Declaring diferent reducer possible states
-const CART_ACTION_TYPES = {
-  ADD_TO_CART: "ADD_TO_CART",
-  DECREASE_CART_COUNT: "DECREASE_CART_COUNT",
-  REMOVE_FROM_CART: "REMOVE_FROM_CART",
-  TOGGLE_VISIBILITY: "TOGGLE_VISIBILITY",
-};
-
 export const CartContext = createContext({
   cartVisibility: false,
   cartItems: [],
@@ -25,6 +17,11 @@ export const CartContext = createContext({
   setItemCount: () => {},
   setCartTotal: () => {},
 });
+
+const CART_ACTION_TYPES = {
+  UPDATE_CART: "UPDATE_CART",
+  TOGGLE_VISIBILITY: "TOGGLE_VISIBILITY",
+};
 
 //------------------- Helper functions -----------------------
 //Remove from cart function
@@ -56,7 +53,7 @@ const addToCart = (cartItems, itemToAdd) => {
     return newArray;
   }
 };
-
+//Decrease Items on cart function
 const decreaseItemFromCart = (cartItems, itemToDecrease) => {
   const { id } = itemToDecrease;
   let newArray = cartItems.map((cartItem) =>
@@ -78,13 +75,13 @@ const decreaseItemFromCart = (cartItems, itemToDecrease) => {
 const cartItemReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case "UPDATE_CART": {
+    case CART_ACTION_TYPES.UPDATE_CART: {
       return {
         ...state,
         ...payload,
       };
     }
-    case "TOGGLE_VISIBILITY": {
+    case CART_ACTION_TYPES.TOGGLE_VISIBILITY: {
       return {
         ...state,
         cartVisibility: !state.cartVisibility,
@@ -168,7 +165,7 @@ const CartProvider = ({ children }) => {
 
   const setCartVisibility = () => {
     dispatch({
-      type: CART_ACTION_TYPES.TOGGLE_VISIBILITY,
+      type: "TOGGLE_VISIBILITY",
     });
   };
 
