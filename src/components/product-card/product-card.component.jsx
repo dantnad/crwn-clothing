@@ -15,7 +15,7 @@ import {
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl, id } = product;
-  const { addItemToCart } = useContext(CartContext);
+  const { updateCartItems } = useContext(CartContext);
 
   return (
     <ProductCardContainer>
@@ -26,12 +26,15 @@ const ProductCard = ({ product }) => {
       </ProductFooter>
       <Button
         onClick={() => {
-          addItemToCart({
-            id,
-            price,
-            imageUrl,
-            name,
-          });
+          updateCartItems(
+            {
+              id,
+              price,
+              imageUrl,
+              name,
+            },
+            "ADD_TO_CART"
+          );
         }}
         buttonType={BUTTON_TYPE_CLASSES.inverted}
       >
