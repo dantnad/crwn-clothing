@@ -1,14 +1,16 @@
 // React imports
 import { Outlet } from "react-router-dom";
-import { useContext, Fragment } from "react";
-import { useSelector } from "react-redux";
+import { Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+//Selector imports
+import { selectCartVisibility } from "../../store/cart/cart.selector";
+import { setCartVisibility } from "../../store/cart/cart.actions";
 // Component imports
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 // Context Imports
 import { selectCurrentUser } from "../../store/user/user.selector";
-import { CartContext } from "../../context/cart.context";
 //Utils import
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 // Stylesheet import
@@ -20,9 +22,10 @@ import {
 } from "./navigation.styles.jsx";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   // Get information about the cart
-  const { cartVisibility, setCartVisibility } = useContext(CartContext);
+  const cartVisibility = useSelector(selectCartVisibility);
 
   return (
     <Fragment>
@@ -55,10 +58,7 @@ const Navigation = () => {
           )}
           {/* Cart Icon with an onclick listener to toggle Cart visibility */}
           <CartIcon
-            onClick={() => {
-              // Toggle functionality for the cart icon and dropdown
-              setCartVisibility(!cartVisibility);
-            }}
+            onClick={() => dispatch(setCartVisibility(!cartVisibility))}
           />
         </NavLinks>
         {/* If the cartVisibility is true, show the dropdown */}

@@ -1,5 +1,10 @@
-import { useContext } from "react";
-import { CartContext } from "../../context/cart.context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItemToCart,
+  removeItemFromCart,
+  reduceItemFromCart,
+} from "../../store/cart/cart.actions";
+import { selectCartItems } from "../../store/cart/cart.selector";
 import Button from "../button/button.component";
 import {
   CheckoutItemContainer,
@@ -11,13 +16,16 @@ import {
 } from "./checkout-item.styles.jsx";
 
 const CheckoutItem = ({ product }) => {
-  const { imageUrl, name, quantity, price } = product;
-  const { updateCartItems } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
-  const addItemHandler = () => updateCartItems(product, "ADD_TO_CART");
+  const { imageUrl, name, quantity, price } = product;
+
+  const addItemHandler = () => dispatch(addItemToCart(cartItems, product));
   const decreaseItemHandler = () =>
-    updateCartItems(product, "REDUCE_ITEM_COUNT");
-  const removeItemHandler = () => updateCartItems(product, "REMOVE_FROM_CART");
+    dispatch(reduceItemFromCart(cartItems, product));
+  const removeItemHandler = () =>
+    dispatch(removeItemFromCart(cartItems, product));
 
   return (
     <CheckoutItemContainer>
